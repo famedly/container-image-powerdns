@@ -1,4 +1,4 @@
-FROM docker.io/alpine:3.14
+FROM docker.io/alpine:edge
 ARG VERSION
 RUN apk --no-cache add \
     pdns=${VERSION} \
