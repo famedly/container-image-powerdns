@@ -1,0 +1,26 @@
+---
+name: Docker
+
+on:
+  push:
+    tags: [ '*.*.*' ]
+
+env:
+  VERSION: "4.6.2-r1"
+
+jobs:
+  docker-ghcr:
+    uses: famedly/github-workflows/.github/workflows/docker.yml@f982f0f1e56ffdc109c0bb6b2bf23ec91b7da55e
+    with:
+      push: ${{ github.event_name != 'pull_request' }} # Always build, don't publish on pull requests
+      image_name: famedly/powerdns
+      build_args: "VERSION=${{ github.ref_name }}"
+  docker-nexus:
+    uses: famedly/github-workflows/.github/workflows/docker.yml@f982f0f1e56ffdc109c0bb6b2bf23ec91b7da55e
+    with:
+      push: ${{ github.event_name != 'pull_request' }} # Always build, don't publish on pull requests
+      registry_user: famedly-ci
+      registry: docker-oss.nexus.famedly.de
+      image_name: powerdns
+      build_args: "VERSION=${{ github.ref_name }}"
+    secrets: inherit
