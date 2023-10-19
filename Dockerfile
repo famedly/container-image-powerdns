@@ -1,8 +1,10 @@
 FROM docker.io/alpine:3.18
 ARG VERSION
+RUN apk --no-cache add bash
+SHELL ["/bin/bash", "-c"]
 RUN apk --no-cache add \
-    pdns=${VERSION} \
-    pdns-backend-pgsql=${VERSION} \
+    pdns=${VERSION#v} \
+    pdns-backend-pgsql=${VERSION#v} \
     pdns-tools \
     libcap
 
