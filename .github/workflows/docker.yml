@@ -3,7 +3,9 @@ name: Docker
 
 on:
   push:
-    tags: [ '*' ]
+    branches:
+      - 'main'
+  pull_request:
 
 jobs:
   docker-nexus:
@@ -13,5 +15,7 @@ jobs:
       registry_user: famedly-ci
       registry: docker-oss.nexus.famedly.de
       image_name: powerdns
-      build_args: "VERSION=${{ github.ref_name }}"
+      build_args: "VERSION=4.7.4-r0"
+      tags: |
+        type=raw,value=v4.7.4-r0
     secrets: inherit
