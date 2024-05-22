@@ -1,4 +1,4 @@
-FROM docker.io/alpine:3.19
+FROM docker.io/alpine:edge
 ARG VERSION
 RUN apk --no-cache add bash
 SHELL ["/bin/bash", "-c"]
